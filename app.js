@@ -8,10 +8,14 @@ var app = express();
 
 app.get('/keyboard', function(req, res) {
 	var data = {
-		"type": "buttons",
-		"buttons": ["Fruits", "Vegetables", "Information"]
-	};
-
+		{
+  "type": "buttons",
+  "buttons": [
+    "선택 1",
+    "선택 2",
+    "선택 3"
+  ]
+}
 	res.json(data);
 });
 
