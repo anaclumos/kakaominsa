@@ -8,7 +8,6 @@ var app = express();
 
 app.get('/keyboard', function(req, res) {
 	var data = {
-		{
   "type": "buttons",
   "buttons": [
     "선택 1",
