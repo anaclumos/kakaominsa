@@ -1,7 +1,4 @@
-// Calles the express module.
 var express = require('express');
-
-// Calles the http module.
 var http = require('http');
 
 var app = express();
