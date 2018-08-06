@@ -7,16 +7,18 @@ app.get('/keyboard', function(req, res) {
 	var data = {
   'type': 'buttons',
   'buttons': [
-    '선택 1',
-    '선택 2',
-    '선택 3'
+    '선택 A',
+    '선택 B',
+    '선택 C'
   ]
 }
 	res.json(data);
 });
 
 app.post('/message', function(req, res) {
+	console.log('LOGGED')
 	console.log(req)
+	console.log('LOGGED')
 	//var message = req.body.content;
 	//console.log('전달된 메시지입니다: ' + message);
 
@@ -58,18 +60,6 @@ app.post('/message', function(req, res) {
 	}
     */
 	res.json(msg);
-
-	app.get('/keyboard', function(req, res) {
-	var data = {
-  'type': 'buttons',
-  'buttons': [
-    '선택 1',
-    '선택 2',
-    '선택 3'
-  	]
-	}
-	res.json(data);
-	});
 })
 
 http.createServer(app).listen(8081, '0.0.0.0');
