@@ -13,17 +13,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Initial get
 app.get("/keyboard", function(req, res){
   const menu = {
-          "message": {
-              "text": "시작 메뉴에 들어갈 텍스트입니다."
-          },
-          "keyboard": {
               "type": "buttons",
               "buttons": [
                   "버튼 1",
                   "버튼 2",
                   "버튼 3"
               ]
-          }
       };
   res.set({
       "content-type": "application/json"
