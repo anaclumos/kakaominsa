@@ -15,9 +15,7 @@ app.get("/keyboard", function(req, res){
   const menu = {
               "type": "buttons",
               "buttons": [
-                  "버튼 1",
-                  "버튼 2",
-                  "버튼 3"
+                  "시작하기"
               ]
       };
   res.set({
@@ -30,95 +28,53 @@ app.get("/keyboard", function(req, res){
 app.post("/message",function (req, res) {
 
     const _obj = {
-        user_key: req.body.user_key,
-        type: req.body.type,
-        content: req.body.content
+        user_key : req.body.user_key,
+        type     : req.body.type,
+        content  : req.body.content
     };
 
-    console.log(_obj.content)
+    console.log(_obj.user_key + "가 " + _obj.type + "로 된, \"" + _obj.content + "\"라는 문자를 보냈습니다.")
+    
+    var message = {}
 
-
-    if(_obj.content == "버튼 1")
-    {
-      let message = {
-          "message": {
-              "text": "버튼 1을 누르셨습니다."
-          },
-          "keyboard": {
-              "type": "buttons",
-              "buttons": [
-                  "버튼 1",
-                  "버튼 2",
-                  "버튼 3"
-              ]
-          }
-      };
-
-      res.set({
-          "content-type": "application/json"
-      }).send(JSON.stringify(message));
-    }
-
-    else if(_obj.content == "버튼 2")
-    {
-      let message = {
-          "message": {
-              "text": "버튼 2를 누르셨습니다."
-          },
-          "keyboard": {
-              "type": "buttons",
-              "buttons": [
-                  "버튼 1",
-                  "버튼 2",
-                  "버튼 3"
-              ]
-          }
-      };
-      res.set({
-          "content-type": "application/json"
-      }).send(JSON.stringify(message));
-    }
-
-    else if(_obj.content == "버튼 3")
-    {
-      let message = {
-          "message": {
-              "text": "버튼 3을 누르셨습니다."
-          },
-          "keyboard": {
-              "type": "buttons",
-              "buttons": [
-                  "버튼 1",
-                  "버튼 2",
-                  "버튼 3"
-              ]
-          }
-      };
-      res.set({
-          "content-type": "application/json"
-      }).send(JSON.stringify(message));
-    }
-
-    else {
-        let message = {
-            "message": {
-                "text": "모르는 입력입니다."
-            },
-            "keyboard": {
-                "type": "buttons",
-                "buttons": [
-                    "버튼 1",
-                    "버튼 2",
-                    "버튼 3"
-                ]
-            }
-        };
-        res.set({
-            "content-type": "application/json"
-        }).send(JSON.stringify(message));
+    switch (_obj.content) {
+      case "시작하기":
+        message = {
+          "message" : {"text": "카카오민사 Beta 0.1.7에 참여하신 것을 환영합니다.\n버튼을 눌러 진행해보세요."},
+          "keyboard": {"type": "buttons", "buttons": ["급식 정보", "날씨 정보", "일정"]}
+         };
+        res.set({"content-type": "application/json"}).send(JSON.stringify(message));
+        break;
+      case "급식 정보":
+        message = {
+          "message" : {"text": "<급식 정보가 들어갈 곳>"},
+          "keyboard": {"type": "buttons", "buttons": ["급식 정보", "날씨 정보", "일정"]}
+         };
+        res.set({"content-type": "application/json"}).send(JSON.stringify(message));
+        break;
+      case "날씨 정보":
+        message = {
+          "message" : {"text": "<날씨 정보가 들어갈 곳>"},
+          "keyboard": {"type": "buttons", "buttons": ["급식 정보", "날씨 정보", "일정"]}
+         };
+        res.set({"content-type": "application/json"}).send(JSON.stringify(message));
+        break;
+      case "일정":
+        message = {
+          "message" : {"text": "<일정 정보가 들어갈 곳>"},
+          "keyboard": {"type": "buttons", "buttons": ["급식 정보", "날씨 정보", "일정"]}
+         };
+        res.set({"content-type": "application/json"}).send(JSON.stringify(message));
+        break;
+      default:
+        message = {
+          "message" : {"text": "잘못된 입력입니다."},
+          "keyboard": {"type": "buttons", "buttons": ["급식 정보", "날씨 정보", "일정"]}
+         };
+        res.set({"content-type": "application/json"}).send(JSON.stringify(message));
+        break;
     }
 });
 
 http.createServer(app).listen(8081, "0.0.0.0");
-
 console.log("server up and running at http://0.0.0.0:8081")
