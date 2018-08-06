@@ -17,7 +17,7 @@ app.get('/keyboard', function(req, res) {
 
 app.post('/message', function(req, res) {
 	console.log('LOGGED')
-	console.log(req)
+	console.log(req.body)
 	console.log('LOGGED')
 	//var message = req.body.content;
 	//console.log('전달된 메시지입니다: ' + message);
