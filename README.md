@@ -1,7 +1,11 @@
+###### Developed by Sunghyun Cho from August 3rd, 2018 to today.
 # kakaominsa
 ## 카카오민사
-##### Developed by Sunghyun Cho from August 3rd, 2018 to today.
-2018년 8월 12일 개발 보류됨.
+
+#### 2018년 8월 12일 개발 보류됨.
+#### 보류 사유
+* 카카오톡 플러스친구의 Broadcast 기능 미지원으로 인한 알림 전송 불가
+* 차후 [플러스친구 API](https://center-pf.kakao.com)에서 [kakao i](https://i.kakao.com/openbuilder/) 플랫폼으로 전환 예정
 
 ## In one sentence...
 민족사관고등학교 학생/선생님들을 위한 카카오톡 메신저입니다.
