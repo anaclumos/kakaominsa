@@ -9,6 +9,13 @@
   "author": "Sunghyun Cho",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.3"
+    "cheerio": "^1.0.0-rc.2",
+    "excel": "^1.0.0",
+    "express": "^4.16.3",
+    "fetch": "^1.1.0",
+    "request": "^2.88.0",
+    "url-parse": "^1.4.3",
+    "xls-to-json": "^0.5.0",
+    "xlsx-parse-json": "^2.0.2"
   }
 }
