@@ -13,7 +13,7 @@ locationCode = "http://stu.kwe.go.kr"
 accessCode = "sts_sci_md01_001.do"
 schoolCode = "K100000414"
 institutionName = "민족사관고등학교"
-foodCode = 2
+foodCode = 3
 if foodCode == 1:
     foodType = "조식"
 elif foodCode == 2:
@@ -33,7 +33,6 @@ for h in firstRow.find_all('th'):
     temp = [h.text.strip()]
     if temp[0] != "":
         dictionary[temp[0]] = {}
-print(dictionary)
 
 keychain = list(dictionary.keys())
 
@@ -56,11 +55,19 @@ for n in range(len(rows)):
             thisdic = dictionary[keychain[x]]
             thisdic[ah[0]] = ad[x]
 
-for key,val in dictionary.items():
-    print(key, "→", val)
+days = str(rows[1]).split("</td>")
+result = []
+
+for day in days:
+    oneday = day.split("<br/>")
+    for x in range(len(oneday)):
+        if ">" in oneday[x]:
+            oneday[x] = oneday[x][oneday[x].rfind(">") + 1:]
+    result.append(oneday)
 
 for x in range(7):
-    string = dictionary[keychain[x]][foodType]
+    dictionary[keychain[x]][foodType] = result[x]
 
-print(rows[1])
+for key,val in dictionary.items():
+    print(key, "→", val)
 
