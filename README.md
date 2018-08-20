@@ -1,5 +1,4 @@
 ###### Developed by Sunghyun Cho from August 3rd, 2018 to today.
------
 # kakaominsa
 ### 카카오민사
 -----
