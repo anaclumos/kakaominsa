@@ -4,7 +4,7 @@ var app = express();
 var bodyParser = require("body-parser");
 var request = require('request');
 var cheerio = require('cheerio');
-var fetch = require('fetch')
+var fetch = require('fetch');
 
 // parse application/json
 app.use(bodyParser.json());
@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get("/keyboard", function(req, res){
   const menu = {
               "type": "buttons",
-              "buttons": ["시작하기"]
+              "buttons": ["시작!"]
       };
   res.set({
       "content-type": "application/json"
@@ -34,34 +34,48 @@ app.post("/message",function (req, res) {
         content  : req.body.content
     };
 
-var message = {}
+    var mainButtons = ["메뉴에 대해 알려줘!", ""]
+    var message = {}
 
     switch (_obj.content) {
+
       case "시작하기":
         message = {
           "message" : {"text": "카카오민사 Beta 0.3에 참여하신 것을 환영합니다. 버튼을 눌러 진행해보세요."},
-          "keyboard": {"type": "buttons", "buttons": ["오늘 밥 뭐 나와?", "오늘 날씨 어때?", ""]}
+          "keyboard": {"type": "buttons", "buttons": mainButtons}
          };
         res.set({"content-type": "application/json"}).send(JSON.stringify(message));
         break;
-      case "오늘 밥 뭐 나와?":
+
+      case "Return to main":
         message = {
-          "message" : {"text": "<급식 정보가 들어갈 곳>"},
-          "keyboard": {"type": "buttons", "buttons": ["오늘 밥 뭐 나와?", "오늘 날씨 어때?", ""]}
+          "message" : {"text": "🙌"},
+          "keyboard": {"type": "buttons", "buttons": mainButtons}
          };
         res.set({"content-type": "application/json"}).send(JSON.stringify(message));
         break;
-      case "오늘 날씨 어때?":
+
+      case "메뉴에 대해 알려줘!":
+
+      message = {
+          "message" : {"text": "<급식 정보가 들어갈 곳>"},
+          "keyboard": {"type": "buttons", "buttons": ["Return to main"]}
+         };
+        res.set({"content-type": "application/json"}).send(JSON.stringify(message));
+        break;
+
+      case "날씨에 대해 알려줘!":
         message = {
           "message" : {"text": "<날씨 정보가 들어갈 곳>"},
-          "keyboard": {"type": "buttons", "buttons": ["오늘 밥 뭐 나와?", "오늘 날씨 어때?", ""]}
+          "keyboard": {"type": "buttons", "buttons": ["Return to main"]}
          };
         res.set({"content-type": "application/json"}).send(JSON.stringify(message));
         break;
+
       default:
         message = {
           "message" : {"text": "잘못된 입력입니다."},
-          "keyboard": {"type": "buttons", "buttons": ["오늘 밥 뭐 나와?", "오늘 날씨 어때?", ""]}
+          "keyboard": {"type": "buttons", "buttons": ["Return to main"]}
          };
         res.set({"content-type": "application/json"}).send(JSON.stringify(message));
         break;
