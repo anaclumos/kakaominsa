@@ -37,9 +37,9 @@ app.post("/message",function (req, res) {
         content  : req.body.content
     };
 
-    console.log(_obj.user_key + "가 " + _obj.type + "로 된, \"" + _obj.content + "\"라는 문자를 보냈습니다.");
+    console.log(_obj.user_key + " has a sent a message of type " + _obj.type + ", and which is, \"" + _obj.content + "\"");
     var bionic = new PythonShell('Bionic.py');
-    pyshell.on('_obj.content', function (message) {
+    bionic.on('_obj.content', function (message) {
       res.set({"content-type": "application/json"}).send(JSON.stringify(message));
     });
 });
