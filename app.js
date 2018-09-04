@@ -7,7 +7,7 @@ var cheerio = require('cheerio');
 var URL = require('url-parse');
 var fetch = require('fetch')
 var fs = require('fs');
-import {PythonShell} from 'python-shell';
+var PythonShell = require('python-shell');
 
 // parse application/json
 app.use(bodyParser.json());
