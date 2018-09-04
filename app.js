@@ -34,14 +34,14 @@ app.post("/message",function (req, res) {
         content  : req.body.content
     };
 
-    var mainButtons = ["메뉴에 대해 알려줘!", ""]
+    var mainButtons = ["메뉴에 대해 알려줘!", "날씨에 대해 알려줘!", "About 민사요정"]
     var message = {}
 
     switch (_obj.content) {
 
       case "시작하기":
         message = {
-          "message" : {"text": "카카오민사 Beta 0.3에 참여하신 것을 환영합니다. 버튼을 눌러 진행해보세요."},
+          "message" : {"text": "민사요정 Beta 0.3에 참여하신 것을 환영합니다. 버튼을 눌러 진행해보세요."},
           "keyboard": {"type": "buttons", "buttons": mainButtons}
          };
         res.set({"content-type": "application/json"}).send(JSON.stringify(message));
@@ -67,6 +67,14 @@ app.post("/message",function (req, res) {
       case "날씨에 대해 알려줘!":
         message = {
           "message" : {"text": "<날씨 정보가 들어갈 곳>"},
+          "keyboard": {"type": "buttons", "buttons": ["Return to main"]}
+         };
+        res.set({"content-type": "application/json"}).send(JSON.stringify(message));
+        break;
+
+      case "About 민사요정":
+        message = {
+          "message" : {"text": "민사요정 v0.3 beta, Developed by Sunghyun Cho."},
           "keyboard": {"type": "buttons", "buttons": ["Return to main"]}
          };
         res.set({"content-type": "application/json"}).send(JSON.stringify(message));
