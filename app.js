@@ -39,9 +39,9 @@ app.post("/message",function (req, res) {
 
     switch (_obj.content) {
 
-      case "시작하기":
+      case "시작!":
         message = {
-          "message" : {"text": "민사요정 Beta 0.3에 참여하신 것을 환영합니다. 버튼을 눌러 진행해보세요."},
+          "message" : {"text": "민사요정 v0.3 베타 테스트에 참여하신 것을 환영합니다. 버튼을 눌러 진행해보세요."},
           "keyboard": {"type": "buttons", "buttons": mainButtons}
          };
         res.set({"content-type": "application/json"}).send(JSON.stringify(message));
@@ -74,7 +74,7 @@ app.post("/message",function (req, res) {
 
       case "About 민사요정":
         message = {
-          "message" : {"text": "민사요정 v0.3 beta, Developed by Sunghyun Cho."},
+          "message" : {"text": "민사요정 v0.3 beta developed by Sunghyun Cho."},
           "keyboard": {"type": "buttons", "buttons": ["Return to main"]}
          };
         res.set({"content-type": "application/json"}).send(JSON.stringify(message));
