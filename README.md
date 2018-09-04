@@ -9,6 +9,7 @@
 ## In one sentence...
 민족사관고등학교 학생/선생님들을 위한 카카오톡 메신저입니다.
 
+
 Kakaotalk messenger bot for KMLA students and teachers.
 
 ## Note
