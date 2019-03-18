@@ -5,6 +5,7 @@ var bodyParser = require("body-parser");
 var request = require('request');
 var cheerio = require('cheerio');
 var fetch = require('fetch');
+var mealURL = "http://juneyoung.kr/api/school-meal/meal_api.php?countryCode=stu.kwe.go.kr&schulCode=K100000414&insttNm=민족사관고등학교&schulCrseScCode=4&schMmealScCode="
 
 const port = process.env.PORT || 8000;
 
@@ -28,6 +29,33 @@ app.get("/keyboard", function(req, res){
 
 //----------------------------------
 //Kakaotalk message handling engine
+function returnMealInfo(time){
+    request({
+      url: url + time,
+      json: true
+    },
+    function (error, response, body) {
+      if (!error && response.statusCode === 200) {
+          var string = JSON.stringify(body);
+           var v = JSON.parse(string);
+          message = {
+            "message" : {"text": v["날짜"] + "의 " + v["급식 종류"] + " 메뉴는 " + v["메뉴"] + "입니다."},
+            "keyboard": {"type": "buttons", "buttons": ["Return to main"]}
+           };
+          res.set({"content-type": "application/json"}).send(JSON.stringify(message));
+          break; 
+      }
+      else {
+        message = {
+            "message" : {"text": "API 에러가 발생한 것 같아요 ㅠ"},
+            "keyboard": {"type": "buttons", "buttons": ["Return to main"]}
+           };
+          res.set({"content-type": "application/json"}).send(JSON.stringify(message));
+          break;
+      }
+  })
+}
+
 app.post("/message",function (req, res) {
 
     const _obj = {
@@ -36,7 +64,7 @@ app.post("/message",function (req, res) {
         content  : req.body.content
     };
 
-    var mainButtons = ["메뉴에 대해 알려줘!", "날씨에 대해 알려줘!", "About 민사요정"]
+    var mainButtons = ["아침 메뉴", "점심 메뉴", "저녁 메뉴", "내일 아침기 갈까? (미세먼지)", "날씨에 대해 알려줘!", "About 민사요정"]
     var message = {}
 
     switch (_obj.content) {
@@ -57,14 +85,21 @@ app.post("/message",function (req, res) {
         res.set({"content-type": "application/json"}).send(JSON.stringify(message));
         break;
 
-      case "메뉴에 대해 알려줘!":
+      case "아침 메뉴":
+        returnMealInfo(1);
+      case "점심 메뉴":
+        returnMealInfo(2);
+      case "저녁 메뉴":
+        returnMealInfo(3);
 
-      message = {
-          "message" : {"text": "<급식 정보가 들어갈 곳>"},
+      case "내일 아침기 갈까? (미세먼지)":
+        message = {
+          "message" : {"text": "<날씨 정보가 들어갈 곳>"},
           "keyboard": {"type": "buttons", "buttons": ["Return to main"]}
          };
         res.set({"content-type": "application/json"}).send(JSON.stringify(message));
         break;
+
 
       case "날씨에 대해 알려줘!":
         message = {
@@ -76,7 +111,7 @@ app.post("/message",function (req, res) {
 
       case "About 민사요정":
         message = {
-          "message" : {"text": "민사요정 v0.3 beta developed by Sunghyun Cho."},
+          "message" : {"text": "민사요정 v0.4 beta © Sunghyun Cho"},
           "keyboard": {"type": "buttons", "buttons": ["Return to main"]}
          };
         res.set({"content-type": "application/json"}).send(JSON.stringify(message));
